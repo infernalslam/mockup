@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="app.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body ng-controller="TodoListController as app">
+    <nav class="nav has-shadow" id="top">
+        <div class="container">
+            <div class="nav-left">
+                <a class="nav-item" href="../index.html">
+                    <img src="https://sites.google.com/a/fitm.kmutnb.ac.th/faculty-of-industrial-technology-and-management/_/rsrc/1375689189895/logo/FITM%20LOGO%20EN%20COLOR.png?height=117&width=200" alt="Description">
+                </a>
+            </div>
+            <div class="nav-right nav-menu">
+                <a class="nav-item is-tab is-active">Dashboard</a>
+                <a class="nav-item is-tab">Device</a>
+                <a class="nav-item is-tab">Interface</a>
+                <a class="nav-item is-tab">Top 10 Rank</a>
+                <a class="nav-item is-tab">Network</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="section">
+        <div class="container is-fluid">
+            <!-- switch -->
+            <div class="columns">
+                <div class="column is-one-quarter">
+                    <div class="box" ng-repeat="show in app.switch">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64">
+                                    <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p>{{ show.name }}</p> {{show.ip}}
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+
+
+                <div class="column">
+                    <h1 class="title">Internet Traffic</h1> <br>
+                    <canvas id="myChart" width="100%"></canvas> <br>
+                    <div class="columns">
+                        <div class="column" style="text-align: center;">
+                            <span class="tag is-info" style="font-size: 20px;">Inbound</span> <br>
+                            <p> Min : 41.59 Gpbs </p>
+                            <p> Max : 44.94 Gpbs </p>
+                            <p> Avg : 42.3 Gpbs </p>
+                        </div>
+                        <div class="column" style="text-align: center;">
+                            <span class="tag is-danger" style="font-size: 20px;">Outbound</span> <br>
+                            <p> Min : 41.59 Gpbs </p>
+                            <p> Max : 44.94 Gpbs </p>
+                            <p> Avg : 42.3 Gpbs </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="column is-one-quarter">
+                    <h1 class="title">Traffic Ratio</h1>
+                    <canvas id="doc" width="20%"></canvas> <br>
+                    <span class="tag is-black">SW4503</span> <br>
+                    <span class="tag is-dark">R101C</span> <br>
+                    <span class="tag is-light">R124</span> <br>
+                    <span class="tag is-white">R330A</span> <br>
+                    <span class="tag is-primary">Rshop</span> <br>
+                    <span class="tag is-info">R415</span> <br>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+
+    var doc = document.getElementById("doc");
+    var item = {
+        labels: [
+            "Red",
+            "Blue",
+            "Yellow"
+        ],
+        datasets: [{
+            data: [300, 50, 100],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }]
+    };
+    var options = {
+        legend: {
+            display: false
+        },
+        responsive: true
+    }
+    var myPieChart = new Chart(doc, {
+        type: 'doughnut',
+        data: item,
+        options: options
+    });
+</script>
+
+</html>
